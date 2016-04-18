@@ -13,11 +13,12 @@ class PicsController < ApplicationController
 
 
   def new
-    @pic = Pic.new
+    # this pic belongs to the current users
+    @pic = current_user.pics.build
   end
 
   def create
-    @pic = Pic.new(pic_params)
+    @pic = current_user.pics.build(pic_params)
 
     if @pic.save
       redirect_to @pic, notice: "It was posted"
